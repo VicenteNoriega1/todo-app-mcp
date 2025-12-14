@@ -1,0 +1,78 @@
+{
+  "mcpServers": {
+    "todo-app": {
+      "command": "node",
+      "args": ["dist/index.js"],
+      "capabilities": {
+        "tools": true
+      },
+      "tools": [
+        {
+          "name": "add_todo",
+          "description": "Add a new todo item to the list",
+          "inputSchema": {
+            "type": "object",
+            "properties": {
+              "text": {
+                "type": "string",
+                "description": "The text content of the todo item"
+              }
+            },
+            "required": ["text"]
+          }
+        },
+        {
+          "name": "list_todos",
+          "description": "List all todo items with optional filtering by completion status",
+          "inputSchema": {
+            "type": "object",
+            "properties": {
+              "filter": {
+                "type": "string",
+                "enum": ["all", "active", "completed"],
+                "description": "Filter todos by status: all, active (not completed), or completed",
+                "default": "all"
+              }
+            }
+          }
+        },
+        {
+          "name": "toggle_todo",
+          "description": "Toggle the completion status of a todo item",
+          "inputSchema": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "The unique identifier of the todo item to toggle"
+              }
+            },
+            "required": ["id"]
+          }
+        },
+        {
+          "name": "delete_todo",
+          "description": "Delete a todo item from the list",
+          "inputSchema": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "The unique identifier of the todo item to delete"
+              }
+            },
+            "required": ["id"]
+          }
+        },
+        {
+          "name": "clear_completed",
+          "description": "Remove all completed todo items from the list",
+          "inputSchema": {
+            "type": "object",
+            "properties": {}
+          }
+        }
+      ]
+    }
+  }
+}
